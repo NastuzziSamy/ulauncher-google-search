@@ -1,11 +1,11 @@
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
-from ulauncher.api.shared.item.ExtensionSmallResultItem import ExtensionSmallResultItem
 from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAction
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
 from ulauncher.api.shared.action.OpenUrlAction import OpenUrlAction
 
-from src.functions import arg_to_help
+from src.functions import generate_url, GOOGLE_SEARCH_URL
+
 
 ICON_FILE = 'images/icon.png'
 
@@ -20,9 +20,9 @@ def no_input_item():
 
 def show_suggestion_items(suggestions):
     return [
-        ExtensionSmallResultItem(
+        ExtensionResultItem(
             icon=ICON_FILE,
             name=suggestion,
-            on_enter=DoNothingAction()
+            on_enter=OpenUrlAction(generate_url(GOOGLE_SEARCH_URL, suggestion))
         )
     for suggestion in suggestions]
